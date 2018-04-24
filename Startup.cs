@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
+using ToolShed.DAL.EFCore;
+using ToolShed.DAL.Repositories;
+using ToolShed.Models.Domain;
 
 namespace ToolShed
 {
@@ -28,6 +32,10 @@ namespace ToolShed
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+            
+            services.AddSingleton<IItemRepository, ItemRepository>();
+            services.AddDbContext<MainContext>(options => 
+                options.UseSqlServer(Configuration["DefaultConnection"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
