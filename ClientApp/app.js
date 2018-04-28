@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ItemManagement from './components/Items/ItemManagement';
 
 ReactDOM.render(
-    <div>hello world</div>,
+    <ItemManagement />,
     document.getElementById('app')
 );
