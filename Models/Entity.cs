@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ToolShed.Models.Domain
 {
     public class Entity
     {
+        [Key]
         public virtual int Id { get; set; }
 
         [DisplayName("Created At")]
