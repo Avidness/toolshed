@@ -7,9 +7,9 @@ namespace ToolShed.DAL.Repositories
     public interface IRepository<T>
     {
         Task<IEnumerable<T>> GetAll(); 
-        Task<T> Get(long id); 
+        Task<T> Get(int id); 
         void Create(T entity); 
-        void Delete(long id); 
+        void Delete(int id); 
         void Update(T entity); 
     }
 }

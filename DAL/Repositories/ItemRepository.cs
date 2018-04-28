@@ -42,15 +42,15 @@ namespace ToolShed.DAL.Repositories
             return await _db.Items.ToListAsync();
         } 
 
-        public async Task<Item> Get(long id)
+        public async Task<Item> Get(int id)
         {
             return await _db.Items.SingleAsync(d => d.Id == id);
         } 
 
-        public async void Delete(long id)
+        public void Delete(int id)
         {
-            var item = await Get(id);
-            _db.Entry(item).State = EntityState.Deleted;
+            var item = _db.Items.Find(id);
+            _db.Items.Remove(item);
             _db.SaveChanges();
         }
     }

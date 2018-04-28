@@ -47,7 +47,7 @@ namespace ToolShed.Controllers
         }
         
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromForm] Item item)
+        public IActionResult Update(int id, [FromForm] Item item)
         {
             Console.WriteLine("update");
             if (item == null || item.Id != id)
@@ -59,7 +59,7 @@ namespace ToolShed.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(int id)
         {
             _items.Delete(id);
             return new NoContentResult();
