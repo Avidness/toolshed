@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using ToolShed.Models.Domain;
 using ToolShed.DAL.EFCore;
 
@@ -15,33 +16,42 @@ namespace ToolShed.DAL.Repositories
             _db = db;
         }
         
-        public void Save(Item item)
+        public async void Create(Item item)
         {
-            _db.Items.Add(item);
+            item.LastModifiedAt = DateTime.UtcNow;
+            item.CreatedAt = DateTime.UtcNow;
+            await _db.Items.AddAsync(item);
             _db.SaveChanges();
         }
 
-        public IEnumerable<Item> GetAll()
+        public async void Update(Item item)
         {
-           // return _db.Items.ToListAsync();
-           return new List<Item>();
-        } 
+            item.LastModifiedAt = DateTime.UtcNow;
 
-        public Item Get(long id)
-        {
-            //return _db.Items.
-             //   .Single(b => b.id == 1);
-            throw new NotImplementedException();
-        } 
+            // TODO: use DTO's and automapping
+            var existing_item = await Get(item.Id);
+            existing_item.Label = item.Label;
+            existing_item.Description = item.Description;
 
-        public void Delete(long id)
-        {
-
+            _db.Items.Update(existing_item);
+            await _db.SaveChangesAsync();
         }
 
-        public void Update(Item item)
+        public async Task<IEnumerable<Item>> GetAll()
         {
+            return await _db.Items.ToListAsync();
+        } 
 
+        public async Task<Item> Get(long id)
+        {
+            return await _db.Items.SingleAsync(d => d.Id == id);
+        } 
+
+        public async void Delete(long id)
+        {
+            var item = await Get(id);
+            _db.Entry(item).State = EntityState.Deleted;
+            _db.SaveChanges();
         }
     }
 }
