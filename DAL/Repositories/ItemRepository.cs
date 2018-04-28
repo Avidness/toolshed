@@ -24,17 +24,17 @@ namespace ToolShed.DAL.Repositories
             _db.SaveChanges();
         }
 
-        public async void Update(Item item)
+        public void Update(Item item)
         {
             item.LastModifiedAt = DateTime.UtcNow;
 
             // TODO: use DTO's and automapping
-            var existing_item = await Get(item.Id);
+            var existing_item = _db.Items.Find(item.Id);
             existing_item.Label = item.Label;
             existing_item.Description = item.Description;
 
             _db.Items.Update(existing_item);
-            await _db.SaveChangesAsync();
+            _db.SaveChanges();
         }
 
         public async Task<IEnumerable<Item>> GetAll()
