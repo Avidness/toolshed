@@ -49,12 +49,10 @@ namespace ToolShed.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromForm] Item item)
         {
-            Console.WriteLine("update");
             if (item == null || item.Id != id)
                 return BadRequest();
 
             _items.Update(item);
-            Console.WriteLine(item.Id);
             return new NoContentResult();
         }
 
