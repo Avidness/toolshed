@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 import ItemRow from './ItemRow';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Paper from 'material-ui/Paper';
 
 class ItemTable extends React.Component {
     render() {
@@ -18,9 +20,24 @@ class ItemTable extends React.Component {
             );
         });
         return (
-            <div>
-                {itemRows}
-            </div>
+            // TODO: Add sorting
+            <Paper>
+            <Table>
+                <TableHead>
+                <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Description</TableCell>
+                    <TableCell>Created At</TableCell>
+                    <TableCell>Modified At</TableCell>
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                    {itemRows}
+                </TableBody>
+            </Table>
+            </Paper>
         );
     }
 }

@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import ItemTable from './ItemTable/ItemTable';
 import ItemFormWrapper from './ItemForm/ItemFormWrapper';
+import Button from 'material-ui/Button';
 
 class ItemManagement extends React.Component {
     constructor() {
@@ -126,7 +127,8 @@ class ItemManagement extends React.Component {
             <div className="itemManagement">
 
                 <h1>Items</h1>
-                <button onClick={this.handleItemNew}>New</button>
+                <Button variant="raised"
+                    onClick={this.handleItemNew}>New</Button>
                                 
                 <ItemTable items={this.state.items}
                     handleItemEdit={this.handleItemEdit}
