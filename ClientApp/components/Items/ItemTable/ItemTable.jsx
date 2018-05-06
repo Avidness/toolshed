@@ -2,11 +2,12 @@
 import ItemRow from './ItemRow';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
+import { CircularProgress } from 'material-ui/Progress';
 
 class ItemTable extends React.Component {
     render() {
         if (this.props.items == null) {
-            return <div>Loading...</div>
+            return <CircularProgress />
         }
 
         var handleItemEdit = this.props.handleItemEdit;
